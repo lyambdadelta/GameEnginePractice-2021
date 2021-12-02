@@ -2,6 +2,8 @@
 
 #include "ProjectDefines.h"
 
+#include <vector>
+
 RenderEngine::RenderEngine() :
 	m_pRoot(nullptr),
 	m_pRenderWindow(nullptr),
@@ -229,12 +231,12 @@ void RenderEngine::RT_LoadOgreHead()
 	Ogre::MeshPtr v2Mesh;
 
 	v1Mesh = Ogre::v1::MeshManager::getSingleton().load(
-		"ogrehead.mesh", Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME,
+		"sphere.mesh", Ogre::ResourceGroupManager::AUTODETECT_RESOURCE_GROUP_NAME,
 		Ogre::v1::HardwareBuffer::HBU_STATIC, Ogre::v1::HardwareBuffer::HBU_STATIC);
 
 	//Create a v2 mesh to import to, with a different name (arbitrary).
 	v2Mesh = Ogre::MeshManager::getSingleton().createManual(
-		"ogrehead.mesh Imported", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+		"shpere.mesh Imported", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
 	bool halfPosition = true;
 	bool halfUVs = true;
@@ -250,14 +252,28 @@ void RenderEngine::RT_LoadOgreHead()
 	//Create an Item with the model we just imported.
 	//Notice we use the name of the imported model. We could also use the overload
 	//with the mesh pointer:
-	Ogre::Item* item = m_pSceneManager->createItem("ogrehead.mesh Imported",
-		Ogre::ResourceGroupManager::
-		AUTODETECT_RESOURCE_GROUP_NAME,
-		Ogre::SCENE_DYNAMIC);
-	Ogre::SceneNode* sceneNode = m_pSceneManager->getRootSceneNode(Ogre::SCENE_DYNAMIC)->
-		createChildSceneNode(Ogre::SCENE_DYNAMIC);
-	sceneNode->attachObject(item);
-	sceneNode->scale(0.1f, 0.1f, 0.1f);
+	std::vector<std::pair<std::string, Physics::Info>> bodies;
+	bodies.push_back({ "Sun",		Physics::Info({0.1f, 0.0f, 0.0f},	{0.0f, 0.0001f, 0.0f},	100.0f,		0.008f) });
+	bodies.push_back({ "Mercury",	Physics::Info({1.4f, 0.0f, 0.0f},	{0.0f, 1.0f, 0.0f},		1.0f,		0.0007f) });
+	bodies.push_back({ "Venus",		Physics::Info({2.2f, 0.0f, 0.0f},	{0.0f, 1.0f, 0.0f},		5.0f,		0.002f) });
+	bodies.push_back({ "Earth",		Physics::Info({3.0f, 0.0f, 0.0f},	{0.0f, 1.0f, 0.0f},		5.0f,		0.002f) });
+	bodies.push_back({ "Mars",		Physics::Info({3.8f, 0.0f, 0.0f},	{0.0f, 1.0f, 0.0f},		3.0f,		0.0012f) });
+	bodies.push_back({ "Jupyter",	Physics::Info({4.6f, 0.0f, 0.0f},	{0.0f, 1.0f, 0.0f},		20.0f,		0.004f) });
+	bodies.push_back({ "Saturn",	Physics::Info({5.6f, 0.0f, 0.0f},	{0.0f, 1.0f, 0.0f},		20.0f,		0.004f) });
+	bodies.push_back({ "Uranus",	Physics::Info({6.6f, 0.0f, 0.0f},	{0.0f, 1.0f, 0.0f},		10.0f,		0.003f) });
+	bodies.push_back({ "Neptune",	Physics::Info({7.6f, 0.0f, 0.0f},	{0.0f, 1.0f, 0.0f},		10.0f,		0.003f) });
+	for (auto& body : bodies) {
+		Ogre::Item* item = m_pSceneManager->createItem("shpere.mesh Imported",
+			Ogre::ResourceGroupManager::
+			AUTODETECT_RESOURCE_GROUP_NAME,
+			Ogre::SCENE_DYNAMIC);
+		Ogre::SceneNode* sceneNode = m_pSceneManager->getRootSceneNode(Ogre::SCENE_DYNAMIC)->
+			createChildSceneNode(Ogre::SCENE_DYNAMIC);
+		sceneNode->attachObject(item);
+		sceneNode->setName("Planet");
+		sceneNode->setScale({ body.second.r, body.second.r, body.second.r });
+		m_pPhysics.addBody(body.second);
+	}
 }
 
 void RenderEngine::RT_SetupDefaultLight()
@@ -266,6 +282,7 @@ void RenderEngine::RT_SetupDefaultLight()
 	Ogre::Light* light = m_pSceneManager->createLight();
 	Ogre::SceneNode* lightNode = m_pSceneManager->getRootSceneNode()->createChildSceneNode();
 	lightNode->attachObject(light);
+	lightNode->setName("Light");
 	light->setPowerScale(Ogre::Math::PI); //Since we don't do HDR, counter the PBS' division by PI
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
 	light->setDirection(Ogre::Vector3(-1, -1, -1).normalisedCopy());
@@ -274,4 +291,22 @@ void RenderEngine::RT_SetupDefaultLight()
 void RenderEngine::RT_OscillateCamera(float time)
 {
 	m_pCamera->setPosition(Ogre::Vector3(0, time, 15));
+}
+
+void RenderEngine::RT_UpdatePositions(float time)
+{
+	m_pPhysics.Update(time);
+	int first_id = -1;
+	for (auto sceneNode : m_pSceneManager->getRootSceneNode()->getChildIterator()) {
+		if (sceneNode->getName() == "Planet") {
+			if (first_id == -1) {
+				first_id = sceneNode->getId();
+			}
+			int id = sceneNode->getId();
+			sceneNode->setPosition(Ogre::Vector3(m_pPhysics.getBodyInfo(id - first_id).pos));
+		}
+		else {
+			first_id++;
+		}
+	}
 }

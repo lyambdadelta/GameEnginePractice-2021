@@ -16,6 +16,7 @@
 #include "RenderSystems/Direct3D11/OgreD3D11Plugin.h"
 
 #include "RenderThread.h"
+#include "Physics.h"
 
 class RenderEngine
 {
@@ -46,6 +47,8 @@ private:
 	void RT_SetupDefaultLight();
 	void RT_OscillateCamera(float time);
 
+	void RT_UpdatePositions(float time);
+
 	Ogre::Root* m_pRoot;
 	Ogre::Window* m_pRenderWindow;
 	Ogre::SceneManager* m_pSceneManager;
@@ -54,6 +57,8 @@ private:
 	Ogre::D3D11Plugin* m_pD3D11Plugin;
 
 	RenderThread* m_pRT;
+
+	Physics m_pPhysics;
 
 	bool m_bQuit;
 };

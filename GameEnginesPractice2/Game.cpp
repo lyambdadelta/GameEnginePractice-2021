@@ -34,7 +34,12 @@ bool Game::Update()
 	static float t = 0;
 	// t += m_Timer.DeltaTime();
 	t += 0.001f;
-	m_pRenderEngine->GetRT()->RC_OscillateCamera(10.0f + sin(t));
-
+	//m_pRenderEngine->GetRT()->RC_OscillateCamera(10.0f + sin(t));
+	m_pRenderEngine->GetRT()->RC_UpdatePositions(t);
 	return true;
 }
+
+// TODO: 
+// 1. Load Textures for planets
+// 2. Change physics to gravitational
+// 3. volatile -> atomic

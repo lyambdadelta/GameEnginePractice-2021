@@ -18,6 +18,7 @@ enum RenderCommand : UINT32
 	eRC_LoadOgreHead,
 	eRC_SetupDefaultLight,
 	eRC_OscillateCamera,
+	eRC_UpdatePositions,
 	eRC_BeginFrame,
 	eRC_EndFrame
 };
@@ -38,6 +39,7 @@ public:
 	void RC_LoadOgreHead();
 	void RC_SetupDefaultLight();
 	void RC_OscillateCamera(float time);
+	void RC_UpdatePositions(float time);
 	void RC_BeginFrame();
 	void RC_EndFrame();
 

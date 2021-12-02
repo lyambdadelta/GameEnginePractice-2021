@@ -147,6 +147,12 @@ void RenderThread::ProcessCommands()
 			m_pRenderEngine->RT_OscillateCamera(time);
 			break;
 		}
+		case eRC_UpdatePositions:
+		{
+			float time = ReadCommand<float>(n);
+			m_pRenderEngine->RT_UpdatePositions(time);
+			break;
+		}
 		}
 	}
 
@@ -270,6 +276,19 @@ void RenderThread::RC_OscillateCamera(float time)
 
 	LOADINGCOMMAND_CRITICAL_SECTION;
 	byte* p = AddCommand(eRC_OscillateCamera, sizeof(float));
+	AddFloat(p, time);
+}
+
+void RenderThread::RC_UpdatePositions(float time)
+{
+	if (IsRenderThread())
+	{
+		m_pRenderEngine->RT_UpdatePositions(time);
+		return;
+	}
+
+	LOADINGCOMMAND_CRITICAL_SECTION;
+	byte* p = AddCommand(eRC_UpdatePositions, sizeof(float));
 	AddFloat(p, time);
 }
 
