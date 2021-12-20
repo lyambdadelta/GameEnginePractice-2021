@@ -2,6 +2,10 @@
 
 #include "ProjectDefines.h"
 
+#define USE_IMGUI true
+#define DBG true
+static std::vector<RenderNode*> dbgRenderNodes;
+
 RenderEngine::RenderEngine(ResourceManager* pResourceManager) :
 	m_pRoot(nullptr),
 	m_pRenderWindow(nullptr),
@@ -49,14 +53,23 @@ bool RenderEngine::SetOgreConfig()
 
 void RenderEngine::Update()
 {
+	if (DBG) {
+		if (dbgRenderNodes.size() != m_RenderNodes.size()) {
+			for (auto x : m_RenderNodes) {
+				dbgRenderNodes.push_back(x);
+			}
+		}
+		UpdateImGUI(dbgRenderNodes);
+	}
 	Ogre::WindowEventUtilities::messagePump();
 
 	for (RenderNode* pRenderNode : m_RenderNodes)
 	{
+		Ogre::Vector3 vPosition = pRenderNode->GetPosition();
+
 		if (pRenderNode->GetStatic())
 			continue;
-
-		Ogre::Vector3 vPosition = pRenderNode->GetPosition();
+		
 		pRenderNode->GetSceneNode()->setPosition(vPosition);
 
 		Ogre::Quaternion orientation = pRenderNode->GetOrientation();
@@ -97,6 +110,8 @@ void RenderEngine::RT_Init()
 
 	// Scene manager
 	m_pSceneManager = m_pRoot->createSceneManager(Ogre::SceneType::ST_GENERIC, 1);
+
+	assert(!InitImGUI() && "Can't initialize ImGUI");
 }
 
 void RenderEngine::RT_SetupDefaultCamera()

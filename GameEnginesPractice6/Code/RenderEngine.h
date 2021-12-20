@@ -15,6 +15,8 @@
 #include "RenderNode.h"
 #include "ResourceManager.h"
 
+#include "ImguiEditor/ImguiEditor.h"
+
 class RenderEngine
 {
 	friend class RenderThread;

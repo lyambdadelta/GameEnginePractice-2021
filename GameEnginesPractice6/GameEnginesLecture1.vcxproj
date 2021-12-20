@@ -79,13 +79,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\..\SDKs\Ogre\include\OGRE;$(SolutionDir)\..\SDKs\Ogre\include\OGRE\Hlms\Common;$(SolutionDir)\..\SDKs\LuaBridge3\include;$(SolutionDir)\..\SDKs\lua\include;$(SolutionDir)\..\SDKs\crc32;$(SolutionDir)\..\SDKs\flecs;$(SolutionDir)\..\SDKs\tinyxml</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\..\SDKs\Ogre\include\OGRE;$(SolutionDir)\..\SDKs\Ogre\include\OGRE\Hlms\Common;$(SolutionDir)\..\SDKs\LuaBridge3\include;$(SolutionDir)\..\SDKs\lua\include;$(SolutionDir)\..\SDKs\crc32;$(SolutionDir)\..\SDKs\imgui\backends;$(SolutionDir)\..\SDKs\imgui;$(SolutionDir)\..\SDKs\flecs;$(SolutionDir)\..\SDKs\tinyxml</IncludePath>
     <OutDir>$(SolutionDir)\Bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>Bin\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\..\SDKs\Ogre\include\OGRE;$(SolutionDir)\..\SDKs\Ogre\include\OGRE\Hlms\Common;$(SolutionDir)\..\SDKs\LuaBridge3\include;$(SolutionDir)\..\SDKs\lua\include;$(SolutionDir)\..\SDKs\crc32;$(SolutionDir)\..\SDKs\flecs;$(SolutionDir)\..\SDKs\tinyxml</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)\..\SDKs\Ogre\include\OGRE;$(SolutionDir)\..\SDKs\Ogre\include\OGRE\Hlms\Common;$(SolutionDir)\..\SDKs\LuaBridge3\include;$(SolutionDir)\..\SDKs\lua\include;$(SolutionDir)\..\SDKs\crc32;$(SolutionDir)\..\SDKs\imgui\backends;$(SolutionDir)\..\SDKs\imgui;$(SolutionDir)\..\SDKs\flecs;$(SolutionDir)\..\SDKs\tinyxml</IncludePath>
     <OutDir>$(SolutionDir)\Bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>Bin\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -128,8 +128,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\SDKs\Ogre\lib\Debug;$(SolutionDir)\..\SDKs\lua\lib\;$(SolutionDir)\Bin\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);OgreMain_d.lib;RenderSystem_Direct3D11_d.lib;OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreMeshLodGenerator_d.lib;OgreSceneFormat_d.lib;lua54.lib;tinyxml.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WindowsSDK_libraryPath);$(SolutionDir)\..\SDKs\imgui;$(SolutionDir)\..\SDKs\imgui\backends;$(SolutionDir)\..\SDKs\Ogre\lib\Debug;$(SolutionDir)\..\SDKs\lua\lib\;$(SolutionDir)\Bin\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);OgreMain_d.lib;RenderSystem_Direct3D11_d.lib;OgreHlmsPbs_d.lib;OgreHlmsUnlit_d.lib;OgreMeshLodGenerator_d.lib;OgreSceneFormat_d.lib;lua54.lib;tinyxml.lib;d3d11.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y $(SolutionDir)\..\SDKs\Ogre\bin\Debug $(TargetDir)
@@ -151,8 +151,8 @@ xcopy /y $(SolutionDir)\..\SDKs\lua\bin $(TargetDir)</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\SDKs\Ogre\lib\Release;$(SolutionDir)\..\SDKs\lua\lib\;$(SolutionDir)\Bin\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);OgreMain.lib;RenderSystem_Direct3D11.lib;OgreHlmsPbs.lib;OgreHlmsUnlit.lib;OgreMeshLodGenerator.lib;OgreSceneFormat.lib;lua54.lib;tinyxml.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(WindowsSDK_libraryPath);$(SolutionDir)\..\SDKs\imgui;$(SolutionDir)\..\SDKs\imgui\backends;$(SolutionDir)\..\SDKs\Ogre\lib\Release;$(SolutionDir)\..\SDKs\lua\lib\;$(SolutionDir)\Bin\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);OgreMain.lib;RenderSystem_Direct3D11.lib;OgreHlmsPbs.lib;OgreHlmsUnlit.lib;OgreMeshLodGenerator.lib;OgreSceneFormat.lib;lua54.lib;tinyxml.lib;d3d11.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y $(SolutionDir)\..\SDKs\Ogre\bin\Release $(TargetDir)
@@ -187,8 +187,17 @@ xcopy /y $(SolutionDir)\..\SDKs\lua\bin $(TargetDir)</Command>
     <ClInclude Include="Code\ScriptSystem\ScriptNode.h" />
     <ClInclude Include="Code\ScriptSystem\ScriptSystem.h" />
     <ClInclude Include="Code\targetver.h" />
+    <ClInclude Include="Code\ImguiEditor\ImguiEditor.h" />
+    <ClInclude Include="Code\Editor.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\SDKs\imgui\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="..\SDKs\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\SDKs\imgui\imgui.cpp" />
+    <ClCompile Include="..\SDKs\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\SDKs\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\SDKs\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\SDKs\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Code\ECS\ecsControl.cpp" />
     <ClCompile Include="Code\ECS\ecsMesh.cpp" />
     <ClCompile Include="Code\ECS\ecsPhys.cpp" />
@@ -209,6 +218,8 @@ xcopy /y $(SolutionDir)\..\SDKs\lua\bin $(TargetDir)</Command>
     <ClCompile Include="Code\ResourceManager.cpp" />
     <ClCompile Include="Code\ScriptSystem\ScriptNode.cpp" />
     <ClCompile Include="Code\ScriptSystem\ScriptSystem.cpp" />
+    <ClCompile Include="Code\ImguiEditor\ImguiEditor.cpp" />
+    <ClCompile Include="Code\Editor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SDKs\flecs\flecs.vcxproj">
