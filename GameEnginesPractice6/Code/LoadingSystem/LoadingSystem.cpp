@@ -3,6 +3,7 @@
 #include "OgreSceneManager.h"
 #include "tinyxml.h"
 #include <regex>
+#include <ctime>
 
 LoadingSystem::LoadingSystem(EntityManager* pEntityManager, const std::string& scriptsRoot) :
 	m_pEntityManager(pEntityManager),
@@ -36,16 +37,26 @@ void LoadingSystem::SaveToXML(const std::string fileName)
 {
 	const auto pathName = m_strSavesRootPath + fileName;
 	TiXmlDocument doc(pathName.c_str());
-	const auto elem = doc.FirstChildElement("scene");
-	auto entityQueue = m_pEntityManager->GetEntityQueue();
+	TiXmlElement* decl = new TiXmlElement("scene");
 
+	std::time_t result = std::time(nullptr);
+	decl->SetAttribute("name", std::asctime(std::localtime(&result)));
+
+	const auto elem = doc.LinkEndChild(decl);
+	auto entityQueue = m_pEntityManager->GetEntityQueue();
+	TiXmlElement* e;
 	for (auto& entity : entityQueue)
 	{
-		for (TiXmlElement* e = elem->FirstChildElement("character"); e != NULL; e = e->NextSiblingElement("character"))
-		{
-			TiXmlElement* meshElement = e->FirstChildElement("meshName");
-			meshElement->SetAttribute("meshName", entity.second.pScriptNode->GetMeshName().c_str());
-		}
+		e = new TiXmlElement("character");
+		elem->LinkEndChild(e);
+		std::string scriptName = entity.second.pScriptNode->m_strScriptPath.c_str();
+		std::size_t found = scriptName.find_last_of("\\");
+		e->SetAttribute("meshName", entity.second.pRenderNode->GetMeshName().c_str());
+		e->SetAttribute("scriptName", scriptName.substr(found + 1).c_str());
+		std::string res = { std::to_string(entity.second.pRenderNode->GetPosition().x) + ","
+							+ std::to_string(entity.second.pRenderNode->GetPosition().y) + ","
+							+ std::to_string(entity.second.pRenderNode->GetPosition().z) };
+		e->SetAttribute("position", res.c_str());
 	}
 
 	doc.SaveFile();

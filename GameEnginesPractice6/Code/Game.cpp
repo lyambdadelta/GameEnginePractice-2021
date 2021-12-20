@@ -66,6 +66,11 @@ void Game::Run()
 
 bool Game::Update()
 {
-	m_pEcs->progress();
+	if (!EditorMode()) {
+		m_pEcs->progress();
+	}
+	if (NeedWrite()) {
+		m_pLoadingSystem->SaveToXML("initialScene.xml");
+	}
 	return true;
 }

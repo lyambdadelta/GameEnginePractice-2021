@@ -18,4 +18,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 void UpdateImGUI(std::vector<RenderNode*>& m_pRenderNodes);
 
 void CreateTree(std::vector<RenderNode*>& m_pRenderNodes);
+
+bool NeedWrite();
+bool EditorMode();
 //void CreateNode(Ogre::SceneNode* sceneNode);

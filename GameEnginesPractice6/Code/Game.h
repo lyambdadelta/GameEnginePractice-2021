@@ -9,6 +9,7 @@
 #include "GameTimer.h"
 #include "flecs.h"
 #include "LoadingSystem/LoadingSystem.h"
+#include "ImguiEditor/ImguiEditor.h"
 
 class Game
 {

@@ -1,12 +1,12 @@
-<scene name="Initial Scene">
-	<character name="Player" scriptName="Pawn.lua" meshName="ogrehead.mesh" position="0.0,0.0,0.0"/>
-	<character name="ogre_enemy" scriptName="Actor.lua" meshName="ogrehead.mesh" position="25.0,0.0,0.0"/>
-	<character name="ogre_enemy" scriptName="Actor.lua" meshName="ogrehead.mesh" position="15.0,0.0,0.0"/>
-	<character name="ogre_enemy" scriptName="Actor.lua" meshName="ogrehead.mesh" position="15.0,0.0,20.0"/>
-	<character name="ogre_enemy" scriptName="Actor.lua" meshName="ogrehead.mesh" position="-25.0,0.0,0.0"/>
-	<character name="ogre_enemy" scriptName="Actor.lua" meshName="ogrehead.mesh" position="-15.0,0.0,0.0"/>
-	<character name="ogre_enemy" scriptName="Actor.lua" meshName="ogrehead.mesh" position="25.0,10.0,0.0"/>
-	<character name="ogre_enemy" scriptName="Actor.lua" meshName="ogrehead.mesh" position="25.0,-15.0,0.0"/>
-	<character name="ogre_enemy" scriptName="Actor.lua" meshName="ogrehead.mesh" position="25.0,-15.0,-10.0"/>
-	<character name="ogre_enemy" scriptName="Actor.lua" meshName="ogrehead.mesh" position="25.0,-15.0,10.0"/>
+<scene name="Mon Dec 20 14:28:38 2021&#x0A;">
+    <character meshName="ogrehead.mesh" scriptName="Pawn.lua" position="0.000000,0.000000,0.000000" />
+    <character meshName="ogrehead.mesh" scriptName="Actor.lua" position="25.000000,0.000000,0.000000" />
+    <character meshName="ogrehead.mesh" scriptName="Actor.lua" position="15.000000,0.000000,0.000000" />
+    <character meshName="ogrehead.mesh" scriptName="Actor.lua" position="15.000000,0.000000,20.000000" />
+    <character meshName="ogrehead.mesh" scriptName="Actor.lua" position="7.424000,0.000000,0.000000" />
+    <character meshName="ogrehead.mesh" scriptName="Actor.lua" position="-15.000000,0.000000,0.000000" />
+    <character meshName="ogrehead.mesh" scriptName="Actor.lua" position="25.000000,10.000000,0.000000" />
+    <character meshName="ogrehead.mesh" scriptName="Actor.lua" position="25.000000,-15.000000,0.000000" />
+    <character meshName="ogrehead.mesh" scriptName="Actor.lua" position="25.000000,-15.000000,-10.000000" />
+    <character meshName="ogrehead.mesh" scriptName="Actor.lua" position="25.000000,-15.000000,10.000000" />
 </scene>

@@ -54,8 +54,9 @@ public:
 	std::string GetMeshName() const;
 	bool GetIsStatic() const;
 
-private:
 	std::string m_strScriptPath;
+
+private:
 
 	InputHandler* m_pInputHandler;
 	
