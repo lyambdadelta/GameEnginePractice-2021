@@ -14,6 +14,12 @@
 #include "../ECS/ecsScript.h"
 #include "../FileSystem/GEFile.h"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#define stat _stat
+
+
 template <typename T>
 struct EnumWrapper
 {
@@ -55,6 +61,7 @@ public:
 	bool GetIsStatic() const;
 
 	std::string m_strScriptPath;
+	time_t mod_time;
 
 private:
 
