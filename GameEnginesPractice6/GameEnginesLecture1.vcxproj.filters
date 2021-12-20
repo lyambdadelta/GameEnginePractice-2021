@@ -93,9 +93,6 @@
     <ClInclude Include="Code\ImguiEditor\ImguiEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Editor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Game.cpp">
@@ -180,9 +177,6 @@
       <Filter>imgui</Filter>
     </ClCompile>
     <ClCompile Include="Code\ImguiEditor\ImguiEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Editor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

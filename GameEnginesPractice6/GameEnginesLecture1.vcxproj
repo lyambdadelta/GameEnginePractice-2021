@@ -188,7 +188,6 @@ xcopy /y $(SolutionDir)\..\SDKs\lua\bin $(TargetDir)</Command>
     <ClInclude Include="Code\ScriptSystem\ScriptSystem.h" />
     <ClInclude Include="Code\targetver.h" />
     <ClInclude Include="Code\ImguiEditor\ImguiEditor.h" />
-    <ClInclude Include="Code\Editor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SDKs\imgui\backends\imgui_impl_dx11.cpp" />
@@ -219,7 +218,6 @@ xcopy /y $(SolutionDir)\..\SDKs\lua\bin $(TargetDir)</Command>
     <ClCompile Include="Code\ScriptSystem\ScriptNode.cpp" />
     <ClCompile Include="Code\ScriptSystem\ScriptSystem.cpp" />
     <ClCompile Include="Code\ImguiEditor\ImguiEditor.cpp" />
-    <ClCompile Include="Code\Editor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SDKs\flecs\flecs.vcxproj">
